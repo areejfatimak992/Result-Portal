@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Results</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="createinfo.html" class="nav-link">Create Info</a>
+      <a href="studentlist.html" class="nav-link">Student List</a>
+      <a href="displayinfo.html" class="nav-link">Display Info</a>
+      <a href="results.html" class="nav-link">Results</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>All Students Results</h1>
+
+    <div class="top-search">
+      <form id="searchForm" class="inline-form">
+        <input type="text" id="searchInput" name="searchInput" placeholder=" Search by Roll or Name" required>
+        <button type="submit" class="btn" name="action" value="search">Search</button>
+        <button type="button" id="clearSearch" class="btn outline" name="action" value="clear">Clear</button>
+      </form>
+    </div>
+
+    <section class="card">
+      <table id="allResultsTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Roll No</th>
+            <th>Class</th>
+            <th>Total Marks</th>
+            <th>Percentage</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <div id="resultOutput" class="card"></div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

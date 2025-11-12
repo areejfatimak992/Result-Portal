@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="createinfo.html" class="nav-link">Create Info</a>
+      <a href="studentlist.html" class="nav-link">Student List</a>
+      <a href="displayinfo.html" class="nav-link">Display Info</a>
+      <a href="results.html" class="nav-link">Results</a>
+    </nav>
+  </header>
+
+  
+  <div class="container">
+    <section class="card">
+      <h1>Student List</h1>
+      <p class="hint">View all students currently in the system. You can also delete a student if needed.</p>
+      
+      <table id="studentTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Roll</th>
+            <th>Class</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

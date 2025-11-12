@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Info</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="createinfo.html" class="nav-link">Create Info</a>
+      <a href="studentlist.html" class="nav-link">Student List</a>
+      <a href="displayinfo.html" class="nav-link">Display Info</a>
+      <a href="results.html" class="nav-link">Results</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Create Student & Assign Subjects</h1>
+
+    <section class="card two-col">
+      
+      <form id="studentForm" class="panel">
+        <h2>Add or Select Student</h2>
+
+        <label for="studentName">Choose existing name</label>
+        <select id="studentName" aria-label="Existing students">
+          <option value="">-- Select existing or type a new name --</option>
+        </select>
+
+        <label for="newStudentName">Or type new name</label>
+        <input type="text" id="newStudentName" name="newStudentName" placeholder="New student name">
+
+        <label for="studentRoll">Roll No</label>
+        <input type="text" id="studentRoll" name="studentRoll" placeholder="e.g. 86" required>
+
+        <label for="studentClass">Class</label>
+        <input type="text" id="studentClass" name="studentClass" placeholder="e.g. 9" required>
+
+        <div class="form-actions">
+          <button type="submit" class="btn" name="action" value="save">Save Student</button>
+          <button type="button" id="clearStudent" class="btn outline" name="action" value="delete">Clear</button>
+        </div>
+      </form>
+
+      
+      <div class="panel">
+        <h2>Assign Subject Marks</h2>
+
+        <label for="selectStudentForMarks">Select Student</label>
+        <select id="selectStudentForMarks" name="studentForMarks" aria-label="Select student for marks">
+          <option value="">-- Select student --</option>
+        </select>
+
+        <label for="subjectName">Subject</label>
+        <select id="subjectName"name="subjectName" required>
+          <option value="">-- Choose Subject --</option>
+          <option>English</option>
+          <option>Urdu</option>
+          <option>Math</option>
+          <option>Science</option>
+          <option>Islamiyat</option>
+        </select>
+
+        <label for="marksInput">Marks (0-100)</label>
+        <input type="number" id="marksInput"  name="marksInput" min="0" max="100" placeholder="Enter marks" required>
+
+        <div class="form-actions">
+          <button id="saveMarksBtn" class="btn">Save Marks</button>
+          <button id="clearMarks" type="button" class="btn outline">Reset</button>
+        </div>
+
+        <p class="hint">Choose a student from the dropdown, pick a subject, enter marks and save. Totals & grades are calculated automatically.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

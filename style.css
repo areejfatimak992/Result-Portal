@@ -1,0 +1,238 @@
+* {
+  box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: #2b3a28;
+  background-color: #e8eedb; 
+}
+
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image:
+    linear-gradient(rgba(39, 53, 34, 0.4), rgba(39, 53, 34, 0.4)),
+    url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe1PGOkc6YQDZyNUKOnl4M6ncieUbURMhcqw&s");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+.navbar {
+  background-color: rgba(67, 82, 55, 0.96); /* muted olive */
+  padding: 14px 10px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-link {
+  color: #f5f4ee;
+  margin: 0 16px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: #c9d9b3; 
+  color: #2b3a28;
+  transform: translateY(-2px);
+}
+
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.home-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.home-panel {
+  background: rgba(255, 255, 255, 0.65); 
+  backdrop-filter: blur(6px); 
+  padding: 40px 36px;
+  border-radius: 16px;
+  max-width: 880px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(39, 53, 34, 0.12);
+  transition: all 0.3s ease;
+}
+
+.home-panel:hover {
+  transform: translateY(-5px);
+}
+
+.home-panel h1 {
+  color: #324f2b;
+  font-size: 36px;
+  margin-bottom: 18px;
+  letter-spacing: 0.6px;
+}
+
+.home-panel p.intro {
+  color: #44523d;
+  line-height: 1.7;
+  font-size: 16px;
+  margin-bottom: 18px;
+}
+
+.features {
+  list-style: disc;
+  text-align: left;
+  display: inline-block;
+  margin-top: 14px;
+  color: #3c4b38;
+  margin-left: 20px;
+}
+
+.small {
+  color: #6d7766;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.btn {
+  background: #708a5b;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 25px; 
+  text-decoration: none;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin: 8px 10px; 
+  display: inline-block;
+}
+
+.btn.outline {
+  background: transparent;
+  color: #324f2b;
+  border: 2px solid #b7caa0;
+}
+
+.btn:hover {
+  background: #8ea870;
+  box-shadow: 0 4px 10px rgba(100, 120, 80, 0.25);
+  transform: translateY(-3px);
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 20px;
+  align-items: start;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  color: #324f2b;
+  font-weight: 600;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d6d8c6;
+  background: #f8f8f4;
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.form-actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+th, td {
+  border: 1px solid #e0e0d6;
+  padding: 10px 8px;
+  text-align: center;
+  font-size: 14px;
+  color: #2b3a28;
+}
+
+th {
+  background: linear-gradient(180deg, #e4ecd8, #d6e0b6);
+  color: #2f3f25;
+  font-weight: 700;
+}
+
+tr:nth-child(even) td {
+  background: #f9faf6;
+}
+
+.top-search {
+  text-align: right;
+  margin-bottom: 12px;
+}
+
+.inline-form {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.result-card {
+  padding: 14px;
+  border-radius: 8px;
+  background: #ffffff;
+  margin-top: 12px;
+  border: 1px solid #e6ecd9;
+}
+
+.hint {
+  font-size: 13px;
+  color: #5e6e55;
+  margin-top: 12px;
+}
+
+@media (max-width: 900px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+  .home-panel {
+    padding: 24px;
+  }
+  .top-search {
+    text-align: left;
+  }
+}
