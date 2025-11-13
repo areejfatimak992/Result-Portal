@@ -121,7 +121,26 @@ body {
   margin: 8px 10px; 
   display: inline-block;
 }
+.btn.small i {
+  font-size: 14px;
+  vertical-align: middle;
+}
+.btn.small {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+}
+.pdfBtn i {
+  color: #e53935; /* red for PDF */
+  font-size: 15px;
+}
 
+
+.csvBtn i {
+  color: #2e7d32; /* green for CSV */
+  font-size: 15px;
+}
 .btn.outline {
   background: transparent;
   color: #324f2b;
@@ -218,6 +237,33 @@ tr:nth-child(even) td {
   margin-top: 12px;
   border: 1px solid #e6ecd9;
 }
+.report-options {
+  display: none;
+  margin-top: 6px;
+  text-align: center;
+}
+.report-options button {
+  background: #c9d9b3;           /* light olive background */
+  color: #2b3a28;                /* dark text for contrast */
+  border: none;
+  border-radius: 20px;
+  margin-right: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+
+.report-options button:hover {
+  background: #b7caa0;            /* slightly darker hover */
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
 
 .hint {
   font-size: 13px;
@@ -236,3 +282,4 @@ tr:nth-child(even) td {
     text-align: left;
   }
 }
+
