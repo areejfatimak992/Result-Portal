@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Create Info</title>
   <link rel="stylesheet" href="style.css" />
+
 </head>
 <body>
   <header>
@@ -31,7 +32,7 @@
         </select>
 
         <label for="newStudentName">Or type new name</label>
-        <input type="text" id="newStudentName" name="newStudentName" placeholder="New student name">
+        <input type="text" id="newStudentName" name="newStudentName" pattern="[A-Za-z\s]+"  placeholder="Must be alphabetic order">
 
         <label for="studentRoll">Roll No</label>
         <input type="text" id="studentRoll" name="studentRoll" placeholder="e.g. 86" required>
@@ -69,7 +70,7 @@
 
         <div class="form-actions">
           <button id="saveMarksBtn" class="btn">Save Marks</button>
-          <button id="clearMarks" type="button" class="btn outline">Reset</button>
+          <button id="clearMarks" type="button" class="btn outline">Clear</button>
         </div>
 
         <p class="hint">Choose a student from the dropdown, pick a subject, enter marks and save. Totals & grades are calculated automatically.</p>
@@ -80,3 +81,5 @@
   <script src="script.js"></script>
 </body>
 </html>
+
+
