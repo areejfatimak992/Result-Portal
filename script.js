@@ -29,8 +29,17 @@ if(studentForm)
   studentForm.addEventListener("submit",(e)=>{
     e.preventDefault();
        debugger
+       // Restrict name input to alphabets only
+const newNameInput = document.getElementById("newStudentName");
+if(newNameInput) 
+  {
+  newNameInput.addEventListener("input", function () {
+    this.value = this.value.replace(/[^A-Za-z\s]/g, ""); // remove non-letters
+  });
+}
+
     const name=
-      newNameInput.value.trim()||nameSelect.value.trim();
+     ( newNameInput.value.trim()||nameSelect.value.trim()).toUpperCase();
     const roll=rollInput.value.trim();
     const studentClass=classInput.value.trim();
 
@@ -233,9 +242,187 @@ function renderResultsTable(filtered = null) {
       <td>${s.total}</td>
       <td>${s.percentage.toFixed(2)}%</td>
       <td>${s.grade}</td>
+      <td>
+       <button class="btn reportBtn" data-roll="${s.roll}">Generate Report</button>
+<div class="report-options" id="options-${s.roll}" style="display:none; margin-top:5px;">
+  <button class="btn small pdfBtn" data-roll="${s.roll}">
+    <i class="fa-solid fa-file-pdf"></i>PDF
+  </button>
+  <button class="btn small csvBtn" data-roll="${s.roll}">
+    <i class="fa-solid fa-file-csv"></i></i> CSV
+  </button>
+</div>
+
+      </td>
     `;
     tbody.appendChild(row);
   });
+
+ document.querySelectorAll(".reportBtn").forEach((btn)=>{
+    btn.addEventListener("click",(e)=>{
+      const roll=e.target.dataset.roll;
+      const options=document.getElementById(`options-${roll}`);
+
+      options.style.display=options.style.display==="block" ? "none" : "block";
+    });
+  });
+  //pdf button
+  document.querySelectorAll(".pdfBtn").forEach((btn)=>{
+    btn.addEventListener("click",(e)=>{
+      const roll=e.target.dataset.roll;
+      generatePDFReport(roll);
+    });
+  });
+  function generatePDFReport(roll) {
+  const student=students.find((s)=>s.roll===roll);
+  if(!student)
+     return alert("Student not found!");
+
+  const{jsPDF}=window.jspdf;
+  const doc=new jsPDF();
+
+  // 🎓 Title Section
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(20);
+  doc.setTextColor(44, 62, 80);
+  doc.text("Student Report", 70, 20);
+
+  doc.setFontSize(12);
+  doc.setFont("helvetica", "italic");
+  doc.setTextColor(100, 100, 100);
+  doc.text("Result Management Portal", 75, 27);
+
+  // 🧾 Divider Line
+  doc.setDrawColor(150);
+  doc.line(15, 30, 195, 30);
+
+  // 🧍 Student Information
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(14);
+  doc.setTextColor(33, 33, 33);
+  doc.text("Student Information", 15, 40);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(12);
+  doc.text(`Name: ${student.name}`, 20, 48);
+  doc.text(`Roll No: ${student.roll}`, 20, 55);
+  doc.text(`Class: ${student.class}`, 20, 62);
+
+  // ✏️ Subject Marks
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(14);
+  doc.setTextColor(33, 33, 33);
+  doc.text("Marks Details", 15, 75);
+
+  let y = 83;
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(12);
+  doc.setTextColor(50, 50, 50);
+
+  // Table header
+  doc.setFillColor(220, 220, 220);
+  doc.rect(20, y - 5, 100, 8, "F");
+  doc.text("Subject", 25, y);
+  doc.text("Marks", 100, y);
+  y += 5;
+
+  // Marks rows
+  for(let[subject, mark]of Object.entries(student.marks)){
+    y += 8;
+    doc.text(subject, 25, y);
+    doc.text(`${mark ?? "-"}`, 100, y);
+  }
+
+  //  Totals and Grades
+  y += 15;
+  doc.setFont("helvetica", "bold");
+  doc.setTextColor(44, 62, 80);
+  doc.text("Summary", 15, y);
+  y += 8;
+
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(60, 60, 60);
+  doc.text(`Total Marks: ${student.total}`, 20, y);
+  y += 8;
+  doc.text(`Percentage: ${student.percentage.toFixed(2)}%`, 20, y);
+  y += 8;
+  doc.text(`Grade: ${student.grade}`, 20, y);
+
+  //  Footer
+  y += 15;
+  doc.setDrawColor(150);
+  doc.line(15, y, 195, y);
+  y += 10;
+
+  const date = new Date().toLocaleString();
+  doc.setFontSize(10);
+  doc.setTextColor(100);
+  doc.text(`Generated on: ${date}`, 15, y);
+  doc.text("© Result Management System", 135, y);
+
+  // Save file
+  doc.save(`${student.name}_Report.pdf`);
+}
+
+
+
+  //CSV
+  document.querySelectorAll(".csvBtn").forEach((btn)=>{
+    btn.addEventListener("click",(e)=>{
+      const roll=e.target.dataset.roll;
+      generateCSVReport(roll);
+    });
+  });
+ function generateCSVReport(roll){
+  const student=students.find((s)=>s.roll===roll);
+  if(!student){
+    alert("Student not found!");
+    return;
+  }
+
+  // CSV header 
+  const headers = [
+    "Name",
+    "Roll No",
+    "Class",
+    "English",
+    "Urdu",
+    "Math",
+    "Science",
+    "Islamiyat",
+    "Total",
+    "Percentage",
+    "Grade"
+  ];
+
+  // CSV row for this student
+  const row = [
+    student.name,
+    student.roll,
+    student.class,
+    student.marks.English ?? "-",
+    student.marks.Urdu ?? "-",
+    student.marks.Math ?? "-",
+    student.marks.Science ?? "-",
+    student.marks.Islamiyat ?? "-",
+    student.total,
+    `${student.percentage.toFixed(2)}%`,
+    student.grade
+  ];
+
+  // Combine into CSV string
+  const csvContent=[headers.join(","), row.join(",")].join("\n");
+
+  // Create and download file
+  const blob=new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=utf-8;" });
+  const link=document.createElement("a");
+  link.href=URL.createObjectURL(blob);
+  link.download=`${student.name}_Report.csv`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
 }
 
 const searchForm=document.getElementById("searchForm");
@@ -255,3 +442,4 @@ if(searchForm)
     renderResultsTable();
   });
 }
+
