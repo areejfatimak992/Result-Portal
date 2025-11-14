@@ -92,6 +92,20 @@ body {
   font-size: 16px;
   margin-bottom: 18px;
 }
+.edit-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: #010204;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.edit-btn:hover {
+  color: #000001;
+  transform: scale(1.2);
+}
+
 
 .features {
   list-style: disc;
@@ -282,4 +296,106 @@ tr:nth-child(even) td {
     text-align: left;
   }
 }
+   
+/* ============================
+   MODAL FULL-SCREEN OVERLAY
+============================ */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 58, 40, 0.45);
+  backdrop-filter: blur(3px);
+  justify-content: center;
+  align-items: flex-start; /* ⬅ MOVE MODAL TO TOP */
+  padding-top: 40px;      /* ⬅ space from top */
+  z-index: 999;
+}
 
+
+/* ============================
+   MODAL BOX
+============================ */
+.modal-content {
+  background: #f8f8f4;                 /* soft off-white */
+  padding: 26px 30px;
+  width: 420px;
+  border-radius: 16px;
+  box-shadow: 0 10px 35px rgba(43, 58, 40, 0.25);
+  animation: popIn 0.25s ease-out;
+  border: 2px solid #c9d9b3;           /* light olive border */
+}
+
+/* Modal open animation */
+@keyframes popIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+/* ============================
+   CLOSE BUTTON
+============================ */
+.close {
+  float: right;
+  cursor: pointer;
+  font-size: 24px;
+  color: #2b3a28;               /* olive */
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.close:hover {
+  color: #708a5b;               /* lighter olive */
+  transform: scale(1.15);
+}
+
+/* ============================
+   FORM ELEMENT INSIDE MODAL
+============================ */
+#editMarksForm label {
+  margin-top: 14px;
+  color: #2b3a28;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+#editMarksForm input,
+#editMarksForm select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border-radius: 10px;
+  border: 1px solid #d6d8c6;
+  background: #ffffff;
+  font-size: 14px;
+  color: #324f2b;
+  transition: 0.2s;
+}
+
+#editMarksForm input:focus,
+#editMarksForm select:focus {
+  border-color: #8ea870;
+  box-shadow: 0 0 6px rgba(110, 145, 90, 0.3);
+}
+
+/* ============================
+   UPDATE BUTTON
+============================ */
+#editMarksForm button {
+  width: 100%;
+  margin-top: 20px;
+  background: #708a5b; /* olive button */
+  color: #fff;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+#editMarksForm button:hover {
+  background: #8ea870;
+  box-shadow: 0 4px 10px rgba(100, 120, 80, 0.25);
+  transform: translateY(-3px);
+}  

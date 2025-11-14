@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Display Student Information</title>
   <link rel="stylesheet" href="style.css" />
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+
 </head>
 <body>
   <header>
@@ -35,11 +40,45 @@
             <th>Total</th>
             <th>Percentage</th>
             <th>Grade</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody></tbody>
       </table>
     </section>
+       <!-- MARKS UPDATE MODAL -->
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <span id="closeModal" class="close">&times;</span>
+    <h2>Update Student Marks</h2>
+
+    <form id="editMarksForm">
+      
+      <label>Student Name</label>
+      <input type="text" id="editName" name="name" disabled>
+
+      <label>Roll No</label>
+      <input type="text" id="editRoll" name="roll" disabled>
+
+      <label>Subject</label>
+      <select id="editSubject" name="subject">
+        <option>English</option>
+        <option>Urdu</option>
+        <option>Math</option>
+        <option>Science</option>
+        <option>Islamiyat</option>
+      </select>
+
+      <label>Marks</label>
+      <input type="number" id="editMarks" name="marks" min="0" max="100">
+
+      <button type="submit" class="btn">Update</button>
+    </form>
+
+  </div>
+</div>
+
+ 
   </main>
 
   <script src="script.js"></script>
