@@ -5,6 +5,24 @@ function saveToLocalStorage() {
   localStorage.setItem("students", JSON.stringify(students));
 }
 
+
+const editModal = document.getElementById("editModal");
+const closeModal = document.getElementById("closeModal");
+
+if (editModal && closeModal) {
+  closeModal.onclick = () => {
+    editModal.style.display = "none";
+  };
+
+  // Close if clicking outside modal
+  window.addEventListener("click", (event) => {
+    if (event.target === editModal) {
+      editModal.style.display = "none";
+    }
+  });
+}
+
+
 function getGrade(percentage) {
   if (percentage >= 80) return "A+";
   if (percentage >= 70) return "A";
@@ -13,6 +31,11 @@ function getGrade(percentage) {
   if (percentage >= 40) return "D";
   return "F";
 }
+
+
+
+
+
 
 const studentForm = document.getElementById("studentForm");
 if (studentForm) {
@@ -164,17 +187,14 @@ function clearMarksForm() {
 }
 
 
-
 const displayTable = document.getElementById("displayTable");
-if (displayTable)
-  renderDisplayTable();
-
+if (displayTable) renderDisplayTable();
 
 function renderDisplayTable() {
   const tbody = displayTable.querySelector("tbody");
   tbody.innerHTML = "";
 
-  students.forEach((s,index) => {
+  students.forEach((s, index) => {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${s.name}</td>
@@ -190,53 +210,58 @@ function renderDisplayTable() {
       <td>${s.grade}</td>
       <td>
          <button class="edit-btn" data-index="${index}" title="Edit Marks">
-         <i class="fa-solid fa-pen-to-square"></i>
+           <i class="fa-solid fa-pen-to-square"></i>
          </button>
       </td>
     `;
     tbody.appendChild(row);
   });
-   document.querySelectorAll(".edit-btn").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
+
+  // ✅ Add click event to each EDIT button
+  document.querySelectorAll(".edit-btn").forEach((button) => {
+    button.addEventListener("click", (e) => {
       const index = e.currentTarget.dataset.index;
-      editMarks(index);
+      openEditModal(index);  // 🔥 Open your modal
     });
   });
-function editMarks(index) {
+}
+
+function openEditModal(index) {
   const student = students[index];
-  if (!student) return;
 
-  const subjects = ["English", "Urdu", "Math", "Science", "Islamiyat"];
+  document.getElementById("editName").value = student.name;
+  document.getElementById("editRoll").value = student.roll;
 
-  alert(`Editing marks for ${student.name}`);
+  // reset form inputs
+  document.getElementById("editSubject").value = "English";
+  document.getElementById("editMarks").value = student.marks.English ?? "";
 
-  subjects.forEach((subject) => {
-    const currentMark = student.marks[subject] ?? "";
-    const newMark = prompt(`Enter new marks for ${subject} (0–100):`, currentMark);
+  // show modal
+  document.getElementById("editModal").style.display = "block";
 
-    if (newMark === null) return; // if user cancels prompt
+  // handle form submit
+  const form = document.getElementById("editMarksForm");
+  form.onsubmit = function (e) {
+    e.preventDefault();
 
-    const mark = parseInt(newMark);
-    if (isNaN(mark) || mark < 0 || mark > 100) {
-      alert(`Invalid marks for ${subject}, keeping old value.`);
-    } else {
-      student.marks[subject] = mark;
-    }
-  });
+    const subject = document.getElementById("editSubject").value;
+    const marks = parseInt(document.getElementById("editMarks").value);
 
-  student.total = Object.values(student.marks)
-    .filter((m) => typeof m === "number")
-    .reduce((a, b) => a + b, 0);
+    student.marks[subject] = marks;
 
-  student.percentage = (student.total / 500) * 100;
-  student.grade = getGrade(student.percentage);
+    student.total = Object.values(student.marks).reduce((a, b) => a + b, 0);
+    student.percentage = (student.total / 500) * 100;
+    student.grade = getGrade(student.percentage);
 
-  saveToLocalStorage();
-  renderDisplayTable(); 
-  alert(`Marks updated successfully for ${student.name}!`);
+    saveToLocalStorage();
+    renderDisplayTable();
+
+    alert("Marks Updated Successfully!");
+
+    document.getElementById("editModal").style.display = "none";
+  };
 }
 
-}
 
 
 const studentTable = document.getElementById("studentTable");
