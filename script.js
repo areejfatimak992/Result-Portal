@@ -33,10 +33,6 @@ function getGrade(percentage) {
 }
 
 
-
-
-
-
 const studentForm = document.getElementById("studentForm");
 if (studentForm) {
   const nameSelect = document.getElementById("studentName");
@@ -217,7 +213,8 @@ function renderDisplayTable() {
     tbody.appendChild(row);
   });
 
-  // ✅ Add click event to each EDIT button
+
+//model button
   document.querySelectorAll(".edit-btn").forEach((button) => {
     button.addEventListener("click", (e) => {
       const index = e.currentTarget.dataset.index;
@@ -228,7 +225,7 @@ function renderDisplayTable() {
 
 function openEditModal(index) {
   const student = students[index];
-
+  
   document.getElementById("editName").value = student.name;
   document.getElementById("editRoll").value = student.roll;
 
@@ -237,7 +234,7 @@ function openEditModal(index) {
   document.getElementById("editMarks").value = student.marks.English ?? "";
 
   // show modal
-  document.getElementById("editModal").style.display = "block";
+  document.getElementById("editModal").style.display = "flex";
 
   // handle form submit
   const form = document.getElementById("editMarksForm");
