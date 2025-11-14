@@ -6,6 +6,7 @@ function saveToLocalStorage() {
 }
 
 
+/* ===== CLOSE MODAL ===== */
 const editModal = document.getElementById("editModal");
 const closeModal = document.getElementById("closeModal");
 
@@ -14,7 +15,6 @@ if (editModal && closeModal) {
     editModal.style.display = "none";
   };
 
-  // Close if clicking outside modal
   window.addEventListener("click", (event) => {
     if (event.target === editModal) {
       editModal.style.display = "none";
@@ -213,7 +213,6 @@ function renderDisplayTable() {
     tbody.appendChild(row);
   });
 
-
 //model button
   document.querySelectorAll(".edit-btn").forEach((button) => {
     button.addEventListener("click", (e) => {
@@ -222,31 +221,39 @@ function renderDisplayTable() {
     });
   });
 }
-
 function openEditModal(index) {
   const student = students[index];
-  
+
+  // Set values
   document.getElementById("editName").value = student.name;
   document.getElementById("editRoll").value = student.roll;
 
-  // reset form inputs
-  document.getElementById("editSubject").value = "English";
-  document.getElementById("editMarks").value = student.marks.English ?? "";
+  document.getElementById("editEnglish").value = student.marks.English ?? "";
+  document.getElementById("editUrdu").value = student.marks.Urdu ?? "";
+  document.getElementById("editMath").value = student.marks.Math ?? "";
+  document.getElementById("editScience").value = student.marks.Science ?? "";
+  document.getElementById("editIslamiyat").value = student.marks.Islamiyat ?? "";
 
-  // show modal
-  document.getElementById("editModal").style.display = "flex";
+  editModal.style.display = "flex";
 
-  // handle form submit
   const form = document.getElementById("editMarksForm");
+
   form.onsubmit = function (e) {
     e.preventDefault();
 
-    const subject = document.getElementById("editSubject").value;
-    const marks = parseInt(document.getElementById("editMarks").value);
+    student.marks.English = Number(form.english.value);
+    student.marks.Urdu = Number(form.urdu.value);
+    student.marks.Math = Number(form.math.value);
+    student.marks.Science = Number(form.science.value);
+    student.marks.Islamiyat = Number(form.islamiyat.value);
 
-    student.marks[subject] = marks;
+    student.total =
+      student.marks.English +
+      student.marks.Urdu +
+      student.marks.Math +
+      student.marks.Science +
+      student.marks.Islamiyat;
 
-    student.total = Object.values(student.marks).reduce((a, b) => a + b, 0);
     student.percentage = (student.total / 500) * 100;
     student.grade = getGrade(student.percentage);
 
@@ -255,7 +262,7 @@ function openEditModal(index) {
 
     alert("Marks Updated Successfully!");
 
-    document.getElementById("editModal").style.display = "none";
+    editModal.style.display = "none";
   };
 }
 

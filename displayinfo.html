@@ -46,39 +46,54 @@
         <tbody></tbody>
       </table>
     </section>
-       <!-- MARKS UPDATE MODAL -->
-<div id="editModal" class="modal">
+      <div id="editModal" class="modal">
   <div class="modal-content">
     <span id="closeModal" class="close">&times;</span>
-    <h2>Update Student Marks</h2>
+    <h2>Edit Student Marks</h2>
 
     <form id="editMarksForm">
-      
-      <label>Student Name</label>
-      <input type="text" id="editName" name="name" disabled>
 
-      <label>Roll No</label>
-      <input type="text" id="editRoll" name="roll" disabled>
+      <div class="form-row">
+        <label>Student Name</label>
+        <input type="text" name="name" id="editName" disabled>
+      </div>
 
-      <label>Subject</label>
-      <select id="editSubject" name="subject">
-        <option>English</option>
-        <option>Urdu</option>
-        <option>Math</option>
-        <option>Science</option>
-        <option>Islamiyat</option>
-      </select>
+      <div class="form-row">
+        <label>Roll No</label>
+        <input type="text" name="roll" id="editRoll" disabled>
+      </div>
 
-      <label>Marks</label>
-      <input type="number" id="editMarks" name="marks" min="0" max="100">
+      <div class="form-row">
+        <label>English</label>
+        <input type="number" name="english" id="editEnglish" min="0" max="100">
+      </div>
+
+      <div class="form-row">
+        <label>Urdu</label>
+        <input type="number" name="urdu" id="editUrdu" min="0" max="100">
+      </div>
+
+      <div class="form-row">
+        <label>Math</label>
+        <input type="number" name="math" id="editMath" min="0" max="100">
+      </div>
+
+      <div class="form-row">
+        <label>Science</label>
+        <input type="number" name="science" id="editScience" min="0" max="100">
+      </div>
+
+      <div class="form-row">
+        <label>Islamiyat</label>
+        <input type="number" name="islamiyat" id="editIslamiyat" min="0" max="100">
+      </div>
 
       <button type="submit" class="btn">Update</button>
-    </form>
 
+    </form>
   </div>
 </div>
 
- 
   </main>
 
   <script src="script.js"></script>
